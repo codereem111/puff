@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUFF | Protect the Pup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Swapped Bangers for Chewy for a softer, cuter vibe fitting a baby seal -->
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #9b59b6;
+            --light-purple: #c39bd3;
+            --icy-blue: #e0f2fe;
+            --ocean-dark: #0f172a;
+            --ocean-blue: #0284c7;
+        }
+
+        /* Continuous Rotation Animation */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Gentle Bobbing Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Space Mono', monospace;
+            color: #E0E0E0;
+            background-color: var(--ocean-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--primary-purple);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            font-family: 'Chewy', cursive;
+            font-size: 2.5rem;
+            color: var(--light-purple) !important;
+            letter-spacing: 2px;
+        }
+        .nav-link {
+            color: #fff !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        .nav-link:hover { color: var(--light-purple) !important; }
+
+        /* Hero Section - Icy Ocean Background */
+        .hero-section {
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1518182170546-076616fdfa30?auto=format&fit=crop&q=80'); 
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+        }
+
+        .main-title {
+            font-family: 'Chewy', cursive;
+            font-size: clamp(4rem, 10vw, 8rem);
+            color: var(--icy-blue);
+            text-shadow: 4px 4px 0px var(--primary-purple);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        /* Floating/Rotating Hero Character */
+        .hero-img-container {
+            position: relative;
+            margin: 40px 0;
+            animation: float 4s ease-in-out infinite;
+        }
+        .hero-seal {
+            width: clamp(200px, 40vw, 350px);
+            height: clamp(200px, 40vw, 350px);
+            border-radius: 50%;
+            border: 8px solid var(--light-purple);
+            object-fit: cover;
+            box-shadow: 0 0 50px rgba(155, 89, 182, 0.5);
+        }
+
+        .ca-container {
+            background: rgba(155, 89, 182, 0.2);
+            border: 2px dashed var(--light-purple);
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            max-width: 600px;
+            width: 90%;
+            word-break: break-all;
+            margin-bottom: 30px;
+            color: var(--icy-blue);
+        }
+
+        .cta-btn {
+            background: var(--primary-purple);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: 'Chewy', cursive;
+            font-size: 2rem;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(155, 89, 182, 0.4);
+            letter-spacing: 1px;
+        }
+        .cta-btn:hover {
+            transform: scale(1.05) translateY(-5px);
+            background: var(--icy-blue);
+            color: var(--ocean-dark);
+        }
+
+        /* Responsive Gallery */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 3px solid #334155;
+            transition: 0.3s;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+            border-color: var(--light-purple);
+            box-shadow: 0 0 20px rgba(155, 89, 182, 0.4);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Journey Phases */
+        .phase-card {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 6px solid var(--primary-purple);
+            height: 100%;
+            transition: 0.3s;
+        }
+        .phase-card:hover { background: rgba(51, 65, 85, 0.9); transform: translateY(-5px); }
+        .phase-title {
+            font-family: 'Chewy', cursive;
+            color: var(--light-purple);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--primary-purple);
+            text-align: center;
+            background-color: #0b1120;
+        }
+        .social-link {
+            font-size: 2.8rem;
+            color: var(--light-purple);
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .social-link:hover { color: var(--icy-blue); transform: translateY(-5px); }
+
+        @media (max-width: 768px) {
+            .navbar-brand { font-size: 2rem; }
+            .section-title { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">PUFF</a>
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#puffNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="puffNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">The Ice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#story">Story</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Album</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#journey">Journey</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#socials">The Colony</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section" id="home">
+        <h1 class="main-title">PUFF THE SEAL</h1>
+        <div class="hero-img-container">
+            <img src="photo_2026-08-07_21-39-18.jpg" class="hero-seal" alt="Puff The Baby Seal Logo">
+        </div>
+        <p class="fs-4 fw-bold" style="color: var(--icy-blue);">Protect the Pup. Join the Colony. 🦭💜</p>
+        
+        <!-- <div class="ca-container">
+            <strong>CA:</strong> 7wfqmhrotb8ApQCs2cNSd4ZdZDkP5ede7pmLX6gMpump
+        </div>-->
+        
+        <a href="https://t.me/PuffTheBabySeal" class="cta-btn" target="_blank">JOIN THE COLONY</a>
+    </section>
+
+    <section class="container py-5 mt-5" id="story">
+        <div class="row text-center">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-4 fw-bold mb-4" style="font-family:'Chewy'; color:var(--light-purple); letter-spacing: 2px;">LOST IN THE STORM</h2>
+                <p class="lead fs-5">After a violent Arctic storm, a tiny seal pup woke up completely alone. The ice had broken apart. Its family was gone. Its colony had disappeared.</p>
+                <p class="lead fs-5 mt-3">Since that day, <strong>PUFF</strong> has drifted across the frozen ocean, hoping that somewhere, someone is waiting for him. He isn’t searching for treasure. He isn’t searching for power. He’s only searching for a place to belong.</p>
+                <p class="lead fs-5 mt-3" style="color: var(--icy-blue);">One day, people noticed the little seal. Not because he was the biggest. But because everyone knows what it feels like to be lost.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container py-5" id="gallery">
+        <h2 class="text-center mb-5" style="font-family:'Chewy'; font-size: 3.5rem; color: var(--light-purple);">:: PUFF'S ALBUM ::</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-6"><div class="gallery-item"><img src="photo_2026-08-07_21-37-49.jpg" alt="Protect The Pup"></div></div>
+            <div class="col-md-4 col-sm-6"><div class="gallery-item"><img src="photo_2026-08-07_21-39-03.jpg" alt="Puff in a Beanie"></div></div>
+            <div class="col-md-4 col-sm-6"><div class="gallery-item"><img src="photo_2026-08-07_21-39-07.jpg" alt="Puff in Sunglasses"></div></div>
+            <div class="col-md-4 col-sm-6"><div class="gallery-item"><img src="photo_2026-08-07_21-39-12.jpg" alt="Puff at Sunset"></div></div>
+            <div class="col-md-4 col-sm-6"><div class="gallery-item"><img src="photo_2026-08-07_21-39-18.jpg" alt="Puff The Colony Badge"></div></div>
+        </div>
+    </section>
+
+    <section class="py-5 mt-4" id="journey" style="background: rgba(15, 23, 42, 0.7);">
+        <div class="container">
+            <h2 class="text-center mb-5" style="font-family:'Chewy'; font-size: 4rem; color: var(--icy-blue);">❄️ THE JOURNEY HOME</h2>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-4">
+                    <div class="phase-card">
+                        <div class="phase-title">Phase 1: The Drift</div>
+                        <p>The ice breaks. PUFF begins his lonely journey across the Solana ocean. Launch and initial sightings of the tiny pup. 🧊</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="phase-card">
+                        <div class="phase-title">Phase 2: Discovery</div>
+                        <p>People start to notice the little seal. Socials go live. The message spreads: Everyone knows what it feels like to be lost. 🌊</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="phase-card">
+                        <div class="phase-title">Phase 3: The Colony</div>
+                        <p>Little by little, strangers become a family. The community unites to give PUFF a place to belong. 💜</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="phase-card">
+                        <div class="phase-title">Phase 4: Safe Harbor</div>
+                        <p>Every new member brings PUFF one step closer to home. Shared memes, art, and a culture of protecting the pup at all costs. 🏰</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="phase-card" style="border-left-color: var(--icy-blue);">
+                        <div class="phase-title">Phase 5: Belonging</div>
+                        <p>PUFF is finally home. The Colony stands strong together, proving that family is who you choose to protect. 🦭</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="socials">
+        <div class="container">
+            <h2 style="font-family:'Chewy'; font-size: 3rem; color: var(--icy-blue);">FIND YOUR COLONY</h2>
+            <div class="py-4">
+                <a href="https://x.com/puffthebabyseal?s=11" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://t.me/PuffTheBabySeal" class="social-link" target="_blank"><i class="fab fa-telegram"></i></a>
+            </div>
+            <p class="text-white mt-4" style="font-family: 'Space Mono', monospace;">© 2026 THE COLONY. PROTECT THE PUP. 💜</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
